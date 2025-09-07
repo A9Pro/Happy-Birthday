@@ -161,7 +161,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     <!-- Photo Card 1 -->
                     <div class="photo-card" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="Happy-Birthday/idore.jpg" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <img src="idore.jpg" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Summer Adventures</h3>
                             <p class="text-gray-400">Laughs and sunshine on a perfect day.</p>
@@ -169,7 +169,7 @@
                     </div>
                     <!-- Photo Card 2 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="200" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="Happy-Birthday/idore1.jpg" alt="Another cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <img src="idore1.jpg" alt="Another cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Winter Wonderland</h3>
                             <p class="text-gray-400">Warm smiles on a cool, crisp evening.</p>
@@ -177,7 +177,7 @@
                     </div>
                     <!-- Photo Card 3 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="400" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="Happy-Birthday/idore2.jpg" alt="A special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <img src="idore2.jpg" alt="A special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Happy Moments</h3>
                             <p class="text-gray-400">Celebrating milestones and making new memories.</p>
@@ -185,7 +185,7 @@
                     </div>
                     <!-- Photo Card 4 -->
                     <div class="photo-card" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="Happy-Birthday/idore3.jpg" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <img src="idore3.jpg" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Beautiful Day</h3>
                             <p class="text-gray-400">A beautiful day to remember and cherish.</p>
@@ -193,7 +193,7 @@
                     </div>
                     <!-- Photo Card 5 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="200" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="Happy-Birthday/idore4.jpg" alt="Another cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <img src="idore4.jpg" alt="Another cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Cherished Times</h3>
                             <p class="text-gray-400">Treasuring the little moments that matter most.</p>
@@ -201,7 +201,7 @@
                     </div>
                     <!-- Photo Card 6 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="400" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="Happy-Birthday/idore5.jpg" alt="A special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <img src="idore5.jpg" alt="A special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Celebration</h3>
                             <p class="text-gray-400">Celebrating milestones and making new memories.</p>
@@ -209,7 +209,7 @@
                     </div>
                     <!-- Photo Card 7 -->
                     <div class="photo-card" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="Happy-Birthday/idore6.jpg" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <img src="idore6.jpg" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Special Memories</h3>
                             <p class="text-gray-400">More beautiful moments to cherish.</p>
@@ -217,7 +217,7 @@
                     </div>
                     <!-- Photo Card 8 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="200" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="Happy-Birthday/idore7.jpg" alt="Another special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <img src="idore7.jpg" alt="Another special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Looking Ahead</h3>
                             <p class="text-gray-400">Looking forward to what's to come.</p>
@@ -259,158 +259,6 @@
         </footer>
     </div>
     
-    <script>
-        // Scroll-triggered animations
-        function animateOnScroll() {
-            const cards = document.querySelectorAll('[data-aos]');
-            const messageCard = document.querySelector('.message-card');
-            
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                const cardVisible = 150;
-                
-                if (cardTop < window.innerHeight - cardVisible) {
-                    card.classList.add('animate');
-                }
-            });
-            
-            // Message card animation
-            if (messageCard) {
-                const messageTop = messageCard.getBoundingClientRect().top;
-                if (messageTop < window.innerHeight - 150) {
-                    messageCard.classList.add('animate');
-                }
-            }
-        }
-        
-        // Enhanced photo hover effects
-        function addPhotoInteractions() {
-            const photoCards = document.querySelectorAll('.photo-card');
-            
-            photoCards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-16px) scale(1.02)';
-                    this.style.boxShadow = '0 40px 80px rgba(0, 0, 0, 0.7), 0 0 120px rgba(255, 215, 0, 0.3)';
-                    this.style.borderColor = 'rgba(255, 215, 0, 0.6)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    const baseTransform = this.classList.contains('animate') ? 'translateY(0) scale(1)' : 'translateY(60px) scale(1)';
-                    this.style.transform = baseTransform;
-                    this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.1)';
-                    this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                });
-            });
-        }
-        
-        // Parallax effect for floating elements
-        function addParallaxEffect() {
-            const floatingElements = document.querySelectorAll('.floating-element');
-            
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.3;
-                
-                floatingElements.forEach((element, index) => {
-                    const speed = (index + 1) * 0.15;
-                    element.style.transform = `translateY(${rate * speed}px) rotate(${scrolled * 0.05}deg)`;
-                });
-            });
-        }
-        
-        // Smooth scroll enhancement
-        function enhanceScrolling() {
-            const exploreBtn = document.getElementById('explore-btn');
-            if (exploreBtn) {
-                exploreBtn.addEventListener('click', () => {
-                    document.querySelector('.photos-section').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            }
-        }
-        
-        // Add glow effect on mouse movement
-        function addGlowEffect() {
-            document.addEventListener('mousemove', function(e) {
-                const cards = document.querySelectorAll('.photo-card, .message-card, .hero-content');
-                
-                cards.forEach(card => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                        card.style.setProperty('--mouse-x', x + 'px');
-                        card.style.setProperty('--mouse-y', y + 'px');
-                        card.style.background = `
-                        radial-gradient(circle 100px at var(--mouse-x) var(--mouse-y), rgba(255, 215, 0, 0.06), transparent),
-                        var(--glass)
-                        `;
-                    } else {
-                        card.style.background = 'var(--glass)';
-                    }
-                });
-            });
-        }
-        
-        // Initialize all interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            createFireworks();
-            document.getElementById('start-celebration-btn').addEventListener('click', () => {
-                // To re-trigger, we must reset the state and re-create the fireworks
-                document.getElementById('fireworks-overlay').classList.remove('hidden');
-                document.getElementById('main-content').classList.add('hidden');
-                // The fireworks init is handled by the function itself.
-                createFireworks();
-            });
-        });
-        
-        // Listen for scroll events
-        window.addEventListener('scroll', animateOnScroll);
-        
-        // Add subtle 3D tilt to hero section
-        document.addEventListener('mousemove', function(e) {
-            const heroContent = document.querySelector('.hero-content');
-            if (heroContent && heroContent.getBoundingClientRect().top < window.innerHeight) {
-                const rect = heroContent.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                
-                const x = (e.clientX - centerX) / rect.width;
-                const y = (e.clientY - centerY) / rect.height;
-                
-                heroContent.style.transform = `
-                translateY(0) 
-                rotateX(${y * 3}deg) 
-                rotateY(${x * 3}deg)
-                scale(${1 + Math.abs(x * 0.01) + Math.abs(y * 0.01)})
-                `;
-            }
-        });
-        
-        // Reset hero transform when mouse leaves
-        document.addEventListener('mouseleave', function() {
-            const heroContent = document.querySelector('.hero-content');
-            if (heroContent) {
-                heroContent.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
-            }
-        });
-        
-        // Function to reveal main content after fireworks
-        function revealContent() {
-            const mainContent = document.getElementById('main-content');
-            if (mainContent) {
-                mainContent.classList.remove('hidden');
-                // Now that the content is visible, run the other animations and effects
-                animateOnScroll();
-                addPhotoInteractions();
-                addParallaxEffect();
-                enhanceScrolling();
-                addGlowEffect();
-            }
-        }
-    </script>
     <script>
         // Fireworks canvas implementation
         function createFireworks() {
@@ -533,11 +381,10 @@
                     this.vx = vx;
                     this.vy = vy;
                     this.color = color;
-                    this.life = life; // ms
-                    this.maxLife = life;
-                    this.size = size;
                     this.age = 0;
+                    this.life = life;
                     this.dead = false;
+                    this.size = size;
                 }
                 update(dt) {
                     const gravity = 280; // px/s^2
@@ -550,7 +397,7 @@
                     if (this.age >= this.life) this.dead = true;
                 }
                 draw(ctx) {
-                    const t = this.age / this.maxLife;
+                    const t = this.age / this.life;
                     const alpha = Math.max(0, 1 - t);
                     ctx.save();
                     ctx.globalCompositeOperation = 'lighter';
@@ -579,7 +426,7 @@
                     super(x, y, vx, vy, color, life, size);
                 }
                 draw(ctx) {
-                    const t = this.age / this.maxLife;
+                    const t = this.age / this.life;
                     const alpha = Math.max(0, 1 - t);
                     ctx.save();
                     ctx.globalCompositeOperation = 'lighter';
@@ -741,8 +588,160 @@
                 scheduleFireworks();
                 rafId = requestAnimationFrame(frame);
             }
-            init();
+            
+        } // Closing brace for createFireworks()
+            
+        // Scroll-triggered animations
+        function animateOnScroll() {
+            const cards = document.querySelectorAll('[data-aos]');
+            const messageCard = document.querySelector('.message-card');
+            
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const cardVisible = 150;
+                
+                if (cardTop < window.innerHeight - cardVisible) {
+                    card.classList.add('animate');
+                }
+            });
+            
+            // Message card animation
+            if (messageCard) {
+                const messageTop = messageCard.getBoundingClientRect().top;
+                if (messageTop < window.innerHeight - 150) {
+                    messageCard.classList.add('animate');
+                }
+            }
         }
+        
+        // Enhanced photo hover effects
+        function addPhotoInteractions() {
+            const photoCards = document.querySelectorAll('.photo-card');
+            
+            photoCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-16px) scale(1.02)';
+                    this.style.boxShadow = '0 40px 80px rgba(0, 0, 0, 0.7), 0 0 120px rgba(255, 215, 0, 0.3)';
+                    this.style.borderColor = 'rgba(255, 215, 0, 0.6)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const baseTransform = this.classList.contains('animate') ? 'translateY(0) scale(1)' : 'translateY(60px) scale(1)';
+                    this.style.transform = baseTransform;
+                    this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.1)';
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                });
+            });
+        }
+        
+        // Parallax effect for floating elements
+        function addParallaxEffect() {
+            const floatingElements = document.querySelectorAll('.floating-element');
+            
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.3;
+                
+                floatingElements.forEach((element, index) => {
+                    const speed = (index + 1) * 0.15;
+                    element.style.transform = `translateY(${rate * speed}px) rotate(${scrolled * 0.05}deg)`;
+                });
+            });
+        }
+        
+        // Smooth scroll enhancement
+        function enhanceScrolling() {
+            const exploreBtn = document.getElementById('explore-btn');
+            if (exploreBtn) {
+                exploreBtn.addEventListener('click', () => {
+                    document.querySelector('.photos-section').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        }
+        
+        // Add glow effect on mouse movement
+        function addGlowEffect() {
+            document.addEventListener('mousemove', function(e) {
+                const cards = document.querySelectorAll('.photo-card, .message-card, .hero-content');
+                
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                        card.style.setProperty('--mouse-x', x + 'px');
+                        card.style.setProperty('--mouse-y', y + 'px');
+                        card.style.background = `
+                        radial-gradient(circle 100px at var(--mouse-x) var(--mouse-y), rgba(255, 215, 0, 0.06), transparent),
+                        var(--glass)
+                        `;
+                    } else {
+                        card.style.background = 'var(--glass)';
+                    }
+                });
+            });
+        }
+        
+        // Function to reveal main content after fireworks
+        function revealContent() {
+            const mainContent = document.getElementById('main-content');
+            if (mainContent) {
+                mainContent.classList.remove('hidden');
+                // Now that the content is visible, run the other animations and effects
+                animateOnScroll();
+                addPhotoInteractions();
+                addParallaxEffect();
+                enhanceScrolling();
+                addGlowEffect();
+            }
+        }
+
+        // Initialize all interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            createFireworks();
+            document.getElementById('start-celebration-btn').addEventListener('click', () => {
+                // To re-trigger, we must reset the state and re-create the fireworks
+                document.getElementById('fireworks-overlay').classList.remove('hidden');
+                document.getElementById('main-content').classList.add('hidden');
+                // The fireworks init is handled by the function itself.
+                createFireworks();
+            });
+        });
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Add subtle 3D tilt to hero section
+        document.addEventListener('mousemove', function(e) {
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent && heroContent.getBoundingClientRect().top < window.innerHeight) {
+                const rect = heroContent.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                const x = (e.clientX - centerX) / rect.width;
+                const y = (e.clientY - centerY) / rect.height;
+                
+                heroContent.style.transform = `
+                translateY(0) 
+                rotateX(${y * 3}deg) 
+                rotateY(${x * 3}deg)
+                scale(${1 + Math.abs(x * 0.01) + Math.abs(y * 0.01)})
+                `;
+            }
+        });
+        
+        // Reset hero transform when mouse leaves
+        document.addEventListener('mouseleave', function() {
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
+            }
+        });
+        
     </script>
 </body>
 </html>
