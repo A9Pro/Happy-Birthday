@@ -1,169 +1,125 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-gray-900 text-white font-['Inter'] scroll-smooth overflow-x-hidden">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Queen</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-900 text-white font-sans overflow-x-hidden">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+    }
 
-  <!-- Hero Section -->
-  <header class="relative overflow-hidden min-h-screen flex items-center justify-center p-4 sm:p-8 text-center hero-section">
-    <div class="relative z-10 hero-content p-6 sm:p-12 max-w-2xl sm:max-w-4xl w-full mx-auto">
-      <h1 class="text-2xl sm:text-4xl md:text-6xl font-['Playfair_Display'] font-bold leading-tight mb-3 sm:mb-4 
-                 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-rose-300 to-amber-300">
-        Happy Birthday Queen
-      </h1>
-      <p class="text-sm sm:text-base md:text-lg mb-6 sm:mb-8 text-gray-300 max-w-xl mx-auto">
-        A birthday celebration for the extraordinary person who brings light and laughter into our lives.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-        <button class="w-full sm:w-auto px-5 py-2 sm:px-6 sm:py-3 rounded-full text-base sm:text-lg font-bold 
-                       bg-transparent border border-rose-300 text-rose-300 
-                       hover:bg-rose-300 hover:text-white shadow-lg transition transform hover:scale-105 duration-300">
-          Explore Memories
-        </button>
-      </div>
-    </div>
-  </header>
+    /* Fireworks canvas covers entire screen */
+    #fireworksCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .gallery img {
+      max-width: 100%;
+      border-radius: 20px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fireworks -->
+  <canvas id="fireworksCanvas"></canvas>
+
+  <h1 style="text-align:center; margin-top:50px;">🎉 Happy Birthday 🎉</h1>
 
   <!-- Gallery -->
-  <section class="photos-section py-12 sm:py-16 px-3 sm:px-6 bg-gray-900">
-    <div class="container mx-auto max-w-6xl">
-      <h2 class="text-2xl sm:text-3xl md:text-5xl font-['Playfair_Display'] font-bold text-center mb-8 sm:mb-12 
-                 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-        A Collection of Joyful Moments
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        
-        <!-- Photo 1 -->
-        <div class="photo-card">
-          <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore.jpg" 
-               alt="Memory 1" 
-               class="w-full h-56 sm:h-72 object-cover rounded-2xl mb-3 sm:mb-4 shadow-xl">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2">Summer Adventures</h3>
-            <p class="text-gray-400 text-sm sm:text-base">Laughs and sunshine on a perfect day.</p>
-          </div>
-        </div>
+  <div class="gallery" style="text-align:center;">
+    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore.jpg" alt="idore">
+    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore1.jpg" alt="idore1">
+    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore2.jpg" alt="idore2">
+    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore3.jpg" alt="idore3">
+    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore4.jpg" alt="idore4">
+    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore5.jpg" alt="idore5">
+    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore6.jpg" alt="idore6">
+    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore7.jpg" alt="idore7">
+  </div>
 
-        <!-- Photo 2 -->
-        <div class="photo-card">
-          <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore1.jpg" 
-               alt="Memory 2" 
-               class="w-full h-56 sm:h-72 object-cover rounded-2xl mb-3 sm:mb-4 shadow-xl">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2">Smiles Forever</h3>
-            <p class="text-gray-400 text-sm sm:text-base">Every smile is a treasure.</p>
-          </div>
-        </div>
+  <script>
+    // Fireworks effect
+    const canvas = document.getElementById("fireworksCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-        <!-- Photo 3 -->
-        <div class="photo-card">
-          <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore2.jpg" 
-               alt="Memory 3" 
-               class="w-full h-56 sm:h-72 object-cover rounded-2xl mb-3 sm:mb-4 shadow-xl">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2">Golden Hour</h3>
-            <p class="text-gray-400 text-sm sm:text-base">Captured in the glow of sunset.</p>
-          </div>
-        </div>
+    class Firework {
+      constructor(x, y, colors) {
+        this.x = x;
+        this.y = y;
+        this.particles = [];
+        this.colors = colors;
+        for (let i = 0; i < 100; i++) {
+          const angle = Math.random() * 2 * Math.PI;
+          const speed = Math.random() * 5 + 2;
+          this.particles.push({
+            x: this.x,
+            y: this.y,
+            dx: Math.cos(angle) * speed,
+            dy: Math.sin(angle) * speed,
+            life: 100,
+            color: this.colors[Math.floor(Math.random() * this.colors.length)]
+          });
+        }
+      }
+      update() {
+        this.particles.forEach(p => {
+          p.x += p.dx;
+          p.y += p.dy;
+          p.dy += 0.02;
+          p.life--;
+        });
+        this.particles = this.particles.filter(p => p.life > 0);
+      }
+      draw(ctx) {
+        this.particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+        });
+      }
+    }
 
-        <!-- Photo 4 -->
-        <div class="photo-card">
-          <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore3.jpg" 
-               alt="Memory 4" 
-               class="w-full h-56 sm:h-72 object-cover rounded-2xl mb-3 sm:mb-4 shadow-xl">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2">Unforgettable Times</h3>
-            <p class="text-gray-400 text-sm sm:text-base">A day to remember, forever.</p>
-          </div>
-        </div>
+    let fireworks = [];
 
-        <!-- Photo 5 -->
-        <div class="photo-card">
-          <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore4.jpg" 
-               alt="Memory 5" 
-               class="w-full h-56 sm:h-72 object-cover rounded-2xl mb-3 sm:mb-4 shadow-xl">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2">Pure Happiness</h3>
-            <p class="text-gray-400 text-sm sm:text-base">A moment frozen in joy.</p>
-          </div>
-        </div>
+    function animate() {
+      ctx.fillStyle = "rgba(0,0,0,0.2)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      fireworks.forEach(firework => {
+        firework.update();
+        firework.draw(ctx);
+      });
+      fireworks = fireworks.filter(f => f.particles.length > 0);
+      requestAnimationFrame(animate);
+    }
 
-        <!-- Photo 6 -->
-        <div class="photo-card">
-          <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore5.jpg" 
-               alt="Memory 6" 
-               class="w-full h-56 sm:h-72 object-cover rounded-2xl mb-3 sm:mb-4 shadow-xl">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2">Radiant Soul</h3>
-            <p class="text-gray-400 text-sm sm:text-base">Your light shines bright.</p>
-          </div>
-        </div>
+    setInterval(() => {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height / 2;
+      const colors = ["#ff0000", "#ff7300", "#fffb00", "#48ff00", "#00ffd5", "#002bff", "#7a00ff", "#ff00ab"];
+      fireworks.push(new Firework(x, y, colors));
+    }, 800);
 
-        <!-- Photo 7 -->
-        <div class="photo-card">
-          <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore6.jpg" 
-               alt="Memory 7" 
-               class="w-full h-56 sm:h-72 object-cover rounded-2xl mb-3 sm:mb-4 shadow-xl">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2">Forever Cherished</h3>
-            <p class="text-gray-400 text-sm sm:text-base">The memories live on.</p>
-          </div>
-        </div>
+    animate();
 
-        <!-- Photo 8 -->
-        <div class="photo-card">
-          <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore7.jpg" 
-               alt="Memory 8" 
-               class="w-full h-56 sm:h-72 object-cover rounded-2xl mb-3 sm:mb-4 shadow-xl">
-          <div class="p-4 sm:p-6">
-            <h3 class="text-lg sm:text-xl font-bold mb-1 sm:mb-2">Magical Vibes</h3>
-            <p class="text-gray-400 text-sm sm:text-base">Every second is magic with you.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Message Section -->
-  <section class="py-12 sm:py-16 px-3 sm:px-6 bg-gray-950">
-    <div class="container mx-auto max-w-2xl sm:max-w-3xl">
-      <div class="message-card p-6 sm:p-10 text-center">
-        <h2 class="text-xl sm:text-2xl md:text-4xl font-['Playfair_Display'] font-bold mb-3 sm:mb-4 
-                   text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
-          A Message for Hope Etieno Bassey
-        </h2>
-        <p class="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">
-          "Your compassion, strength, and unwavering love inspire everyone around you..."
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-12 sm:py-16 px-3 sm:px-6 text-center bg-gray-900">
-    <h2 class="text-2xl sm:text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-3 sm:mb-4 
-               text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-fuchsia-600">
-      Let's Make This Year Unforgettable
-    </h2>
-    <p class="text-sm sm:text-base md:text-lg text-gray-300 max-w-xl mx-auto mb-6 sm:mb-8">
-      Your journey is just beginning. What new adventure will you take on?
-    </p>
-    <button class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-bold 
-                   bg-gradient-to-br from-fuchsia-600 to-violet-600 hover:from-fuchsia-700 hover:to-violet-700 
-                   shadow-xl text-white transition transform hover:scale-105 duration-300">
-      Start the Celebration!
-    </button>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-6 sm:py-8 text-center text-gray-500 bg-gray-950 text-sm sm:text-base">
-    <p>&copy; 2025 A Special Celebration. All Rights Reserved.</p>
-  </footer>
-
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
