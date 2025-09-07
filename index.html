@@ -201,7 +201,7 @@
                     </div>
                     <!-- Photo Card 6 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="400" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="https://placehold.co/400x288/1f2937/d1d5db?text=Image+6" alt="A special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <img src="uploaded:image_d18b3d.png-ac205d9d-0d27-4f0e-a234-5843924b29f2" alt="A special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">Celebration</h3>
                             <p class="text-gray-400">Celebrating milestones and making new memories.</p>
@@ -261,9 +261,15 @@
     
     <script>
         // Fireworks canvas implementation
+        let running = false;
+        let rafId = null;
+
         function createFireworks() {
+            if (running) return;
+            running = true;
+            if (rafId) cancelAnimationFrame(rafId);
+            
             const OVERLAY_DURATION = 5000; // total experience (ms)
-            const FINAL_SCENE_DELAY = 1000; // how long to show the text before fading out
             const INITIAL_FIREWORKS = 12; // in first 4 seconds
             const INITIAL_WINDOW = 4000; // first 4 seconds
             const EXTRA_FIREWORKS = 8; // random additional
@@ -279,8 +285,6 @@
             let startTime = null;
             let schedule = [];
             let scheduleIndex = 0;
-            let running = true;
-            let rafId = null;
             
             function fitCanvas() {
                 DPR = window.devicePixelRatio || 1;
@@ -289,7 +293,9 @@
                 canvas.style.width = window.innerWidth + 'px';
                 canvas.style.height = window.innerHeight + 'px';
                 ctx = canvas.getContext('2d');
-                ctx.setTransform(1,0,0,1,0,0);
+                ctx.scale(DPR, DPR); // This is the fix. Now all drawing coords are in CSS pixels
+                W = window.innerWidth;
+                H = window.innerHeight;
             }
             
             // Utilities
@@ -300,7 +306,7 @@
             class Rocket {
                 constructor(x, color, vx, vy, explodeY, final = false) {
                     this.x = x;
-                    this.y = canvas.height / DPR + 10;
+                    this.y = H + 10;
                     this.vx = vx;
                     this.vy = vy;
                     this.color = color;
@@ -461,9 +467,9 @@
             }
             
             function spawnRocket() {
-                const margin = Math.max(60, window.innerWidth * 0.06);
-                const x = rand(margin, window.innerWidth - margin);
-                const explodeY = rand(window.innerHeight * 0.18, window.innerHeight * 0.45);
+                const margin = Math.max(60, W * 0.06);
+                const x = rand(margin, W - margin);
+                const explodeY = rand(H * 0.18, H * 0.45);
                 const vx = rand(-80, 80);
                 const vy = -rand(520, 760);
                 const color = choose(COLORS);
@@ -471,11 +477,11 @@
             }
             
             function drawFinalScene() {
-                ctx.clearRect(0,0,canvas.width, canvas.height); // Clear screen
-                ctx.font = `bold ${Math.floor(Math.min(window.innerWidth * 0.1, 100))}px Playfair Display`;
+                ctx.clearRect(0,0,W, H); // Clear screen
+                ctx.font = `bold ${Math.floor(Math.min(W * 0.1, 100))}px Playfair Display`;
                 ctx.textAlign = 'center';
                 
-                const gradient = ctx.createLinearGradient(0, canvas.height / 2 - 50, 0, canvas.height / 2 + 50);
+                const gradient = ctx.createLinearGradient(0, H / 2 - 50, 0, H / 2 + 50);
                 gradient.addColorStop(0, '#ffd700');
                 gradient.addColorStop(0.5, '#e8b4a3');
                 gradient.addColorStop(1, '#c0c0c0');
@@ -486,47 +492,53 @@
                 
                 const text1 = "Happy Birthday";
                 const text2 = "Queen";
-                const text1Y = canvas.height / 2 - 20;
-                const text2Y = canvas.height / 2 + 50;
+                const text1Y = H / 2 - 20;
+                const text2Y = H / 2 + 50;
                 
-                ctx.fillText(text1, canvas.width / 2, text1Y);
-                ctx.fillText(text2, canvas.width / 2, text2Y);
+                ctx.fillText(text1, W / 2, text1Y);
+                ctx.fillText(text2, W / 2, text2Y);
                 
                 // Now, launch the final rocket right underneath the text
-                const x = canvas.width / 2;
-                const y = canvas.height / 2 + 100;
+                const x = W / 2;
+                const y = H / 2 + 100;
                 const vx = 0;
                 const vy = -600;
-                const explodeY = canvas.height / 2 + 40;
+                const explodeY = H / 2 + 40;
                 const color = '#ffd700';
                 rockets.push(new Rocket(x, color, vx, vy, explodeY, true));
             }
             
+            let lastTime = 0;
             function frame(now) {
                 if (!startTime) startTime = now;
                 const elapsed = now - startTime;
+                
+                // Use a fixed timestep for consistent animation across devices
+                const dt = now - lastTime;
+                lastTime = now;
+                
                 while (scheduleIndex < schedule.length && schedule[scheduleIndex] <= elapsed) {
                     spawnRocket();
                     scheduleIndex++;
                 }
                 
-                ctx.clearRect(0,0,canvas.width, canvas.height);
+                ctx.clearRect(0,0,W, H);
                 
                 for (let i = rockets.length - 1; i >= 0; i--) {
                     const r = rockets[i];
-                    r.update(16.6);
+                    r.update(dt);
                     r.draw(ctx);
                     if (r.dead) rockets.splice(i,1);
                 }
                 
                 for (let i = particles.length - 1; i >= 0; i--) {
                     const p = particles[i];
-                    p.update(16.6);
+                    p.update(dt);
                     p.draw(ctx);
                     if (p.dead) particles.splice(i,1);
                 }
                 
-                const MAX_PARTICLES = window.innerWidth < 600 ? 600 : 1200;
+                const MAX_PARTICLES = W < 600 ? 600 : 1200;
                 if (particles.length > MAX_PARTICLES) {
                     particles.splice(0, particles.length - MAX_PARTICLES);
                 }
@@ -551,13 +563,15 @@
                 const finalAnimationDuration = 1500; // Time for final firework to animate
                 const finalStartTime = Date.now();
                 
-                function finalFrame() {
-                    ctx.clearRect(0,0,canvas.width, canvas.height);
+                function finalFrame(now) {
+                    const dt = now - finalStartTime;
+                    
+                    ctx.clearRect(0,0,W, H);
                     drawFinalScene();
                     
                     for (let i = rockets.length - 1; i >= 0; i--) {
                         const r = rockets[i];
-                        r.update(16.6);
+                        r.update(16.6); // Use a fixed step for this final part
                         r.draw(ctx);
                         if (r.dead) rockets.splice(i,1);
                     }
@@ -569,7 +583,7 @@
                         if (p.dead) particles.splice(i,1);
                     }
                     
-                    if (Date.now() - finalStartTime < finalAnimationDuration) {
+                    if (dt < finalAnimationDuration) {
                         requestAnimationFrame(finalFrame);
                     } else {
                         // Fade out the overlay and reveal the main page
@@ -583,13 +597,10 @@
                 requestAnimationFrame(finalFrame);
             }
             
-            function init() {
-                fitCanvas();
-                scheduleFireworks();
-                rafId = requestAnimationFrame(frame);
-            }
-            
-        } // Closing brace for createFireworks()
+            fitCanvas();
+            scheduleFireworks();
+            rafId = requestAnimationFrame(frame);
+        }
             
         // Scroll-triggered animations
         function animateOnScroll() {
