@@ -13,7 +13,7 @@
       color: white;
     }
 
-    /* Fireworks canvas covers entire screen */
+    /* Fireworks canvas behind everything */
     #fireworksCanvas {
       position: fixed;
       top: 0;
@@ -21,12 +21,14 @@
       width: 100vw;
       height: 100vh;
       pointer-events: none;
-      z-index: 9999;
+      z-index: 0; /* 👈 stay at the back */
     }
 
-    .gallery {
+    .content {
+      position: relative;
+      z-index: 1; /* 👈 keep text/images above fireworks */
       text-align: center;
-      margin-top: 60px;
+      margin-top: 50px;
     }
 
     .gallery img {
@@ -40,11 +42,14 @@
   <!-- Fireworks -->
   <canvas id="fireworksCanvas"></canvas>
 
-  <h1 style="text-align:center; margin-top:50px;">🎉 Happy Birthday 🎉</h1>
+  <!-- Content above fireworks -->
+  <div class="content">
+    <h1>🎉 Happy Birthday 🎉</h1>
 
-  <!-- Slideshow -->
-  <div class="gallery">
-    <img id="slideshow" src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore.jpg" alt="Birthday Slideshow">
+    <!-- Slideshow -->
+    <div class="gallery">
+      <img id="slideshow" src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore.jpg" alt="Birthday Slideshow">
+    </div>
   </div>
 
   <script>
