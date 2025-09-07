@@ -54,7 +54,7 @@
             opacity: 1;
         }
 
-        .photo-card:hover {
+        .photo-card:hover, .photo-card:active {
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7), 0 0 120px rgba(255, 215, 0, 0.3);
             border-color: rgba(255, 215, 0, 0.6);
             transform: translateY(-16px) scale(1.02);
@@ -64,7 +64,8 @@
             border-radius: 1.5rem;
             object-fit: cover;
             width: 100%;
-            height: 100%;
+            height: auto;
+            max-height: 288px; /* Matches h-72 */
         }
 
         /* Parallax floating elements */
@@ -131,96 +132,96 @@
     
     <!-- Main Page Content (initially hidden) -->
     <div id="main-content" class="main-page hidden">
-        <header class="relative overflow-hidden min-h-screen flex items-center justify-center p-8 text-center hero-section">
-            <div class="relative z-10 hero-content p-8 md:p-16 max-w-5xl w-full mx-auto">
-                <h1 class="text-3xl md:text-6xl font-['Playfair_Display'] font-bold leading-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-rose-300 to-amber-300 drop-shadow-xl">
+        <header class="relative overflow-hidden min-h-screen flex items-center justify-center p-4 sm:p-8 text-center hero-section">
+            <div class="relative z-10 hero-content p-4 sm:p-8 md:p-16 max-w-5xl w-full mx-auto">
+                <h1 class="text-2xl sm:text-3xl md:text-6xl font-['Playfair_Display'] font-bold leading-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-rose-300 to-amber-300 drop-shadow-xl">
                     Happy Birthday Queen
                 </h1>
-                <p class="text-base md:text-xl font-medium mb-8 text-gray-300 max-w-2xl mx-auto">
+                <p class="text-sm sm:text-base md:text-xl font-medium mb-6 sm:mb-8 text-gray-300 max-w-2xl mx-auto">
                     A birthday celebration for the extraordinary person who brings light and laughter into our lives.
                 </p>
                 <div class="flex items-center justify-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                    <button id="explore-btn" class="px-6 py-3 rounded-full text-lg font-bold transition transform hover:scale-105 duration-300 bg-transparent border border-rose-300 text-rose-300 hover:bg-rose-300 hover:text-white shadow-lg">
+                    <button id="explore-btn" class="px-4 sm:px-6 py-2 sm:py-3 rounded-full text-base sm:text-lg font-bold transition transform hover:scale-105 active:scale-105 duration-300 bg-transparent border border-rose-300 text-rose-300 hover:bg-rose-300 hover:text-white shadow-lg">
                         Explore Memories
                     </button>
                 </div>
             </div>
             
             <!-- Floating elements for visual effect -->
-            <div class="floating-element w-48 h-48 bg-yellow-400 opacity-10 rounded-full blur-3xl" style="top: 10%; left: 15%;"></div>
-            <div class="floating-element w-32 h-32 bg-rose-400 opacity-10 rounded-full blur-3xl" style="top: 70%; left: 80%;"></div>
-            <div class="floating-element w-24 h-24 bg-amber-400 opacity-10 rounded-full blur-3xl" style="top: 50%; left: 50%;"></div>
+            <div class="floating-element w-32 sm:w-48 h-32 sm:h-48 bg-yellow-400 opacity-10 rounded-full blur-3xl" style="top: 10%; left: 15%;"></div>
+            <div class="floating-element w-24 sm:w-32 h-24 sm:h-32 bg-rose-400 opacity-10 rounded-full blur-3xl" style="top: 70%; left: 80%;"></div>
+            <div class="floating-element w-16 sm:w-24 h-16 sm:h-24 bg-amber-400 opacity-10 rounded-full blur-3xl" style="top: 50%; left: 50%;"></div>
         </header>
 
         <!-- Gallery of images -->
-        <section class="photos-section py-20 px-8 bg-gray-900" id="memories">
+        <section class="photos-section py-10 sm:py-20 px-4 sm:px-8 bg-gray-900" id="memories">
             <div class="container mx-auto max-w-6xl">
-                <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-['Playfair_Display'] font-bold text-center mb-8 sm:mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
                     A Collection of Joyful Moments
                 </h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                     <!-- Photo Card 1 -->
                     <div class="photo-card" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore.jpg" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Summer Adventures</h3>
-                            <p class="text-gray-400">Laughs and sunshine on a perfect day.</p>
+                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore.jpg" onerror="this.src='https://picsum.photos/600/400?random=1'" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold mb-2">Summer Adventures</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Laughs and sunshine on a perfect day.</p>
                         </div>
                     </div>
                     <!-- Photo Card 2 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="200" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore1.jpg" alt="Another cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Winter Wonderland</h3>
-                            <p class="text-gray-400">Warm smiles on a cool, crisp evening.</p>
+                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore1.jpg" onerror="this.src='https://picsum.photos/600/400?random=2'" alt="Another cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold mb-2">Winter Wonderland</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Warm smiles on a cool, crisp evening.</p>
                         </div>
                     </div>
                     <!-- Photo Card 3 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="400" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore2.jpg" alt="A special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Happy Moments</h3>
-                            <p class="text-gray-400">Celebrating milestones and making new memories.</p>
+                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore2.jpg" onerror="this.src='https://picsum.photos/600/400?random=3'" alt="A special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold mb-2">Happy Moments</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Celebrating milestones and making new memories.</p>
                         </div>
                     </div>
                     <!-- Photo Card 4 -->
                     <div class="photo-card" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore3.jpg" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Summer Adventures</h3>
-                            <p class="text-gray-400">Laughs and sunshine on a perfect day.</p>
+                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore3.jpg" onerror="this.src='https://picsum.photos/600/400?random=4'" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold mb-2">Summer Adventures</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Laughs and sunshine on a perfect day.</p>
                         </div>
                     </div>
                     <!-- Photo Card 5 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="200" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore4.jpg" alt="Another cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Winter Wonderland</h3>
-                            <p class="text-gray-400">Warm smiles on a cool, crisp evening.</p>
+                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore4.jpg" onerror="this.src='https://picsum.photos/600/400?random=5'" alt="Another cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold mb-2">Winter Wonderland</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Warm smiles on a cool, crisp evening.</p>
                         </div>
                     </div>
                     <!-- Photo Card 6 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="400" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore5.jpg" alt="A special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Happy Moments</h3>
-                            <p class="text-gray-400">Celebrating milestones and making new memories.</p>
+                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore5.jpg" onerror="this.src='https://picsum.photos/600/400?random=6'" alt="A special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold mb-2">Happy Moments</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Celebrating milestones and making new memories.</p>
                         </div>
                     </div>
                     <!-- Photo Card 7 -->
                     <div class="photo-card" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore6.jpg" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Special Memories</h3>
-                            <p class="text-gray-400">More beautiful moments to cherish.</p>
+                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore6.jpg" onerror="this.src='https://picsum.photos/600/400?random=7'" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold mb-2">Special Memories</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">More beautiful moments to cherish.</p>
                         </div>
                     </div>
                     <!-- Photo Card 8 -->
                     <div class="photo-card" data-aos="fade-up" data-aos-delay="200" style="--mouse-x: 0px; --mouse-y: 0px;">
-                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore7.jpg" alt="Another special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">New Adventures</h3>
-                            <p class="text-gray-400">Looking forward to what's to come.</p>
+                        <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore7.jpg" onerror="this.src='https://picsum.photos/600/400?random=8'" alt="Another special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold mb-2">New Adventures</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Looking forward to what's to come.</p>
                         </div>
                     </div>
                 </div>
@@ -228,13 +229,13 @@
         </section>
 
         <!-- Personalized message from friends/family -->
-        <section class="py-20 px-8 bg-gray-950">
+        <section class="py-10 sm:py-20 px-4 sm:px-8 bg-gray-950">
             <div class="container mx-auto max-w-3xl">
-                <div class="message-card p-8 md:p-12 text-center" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
-                    <h2 class="text-3xl md:text-4xl font-['Playfair_Display'] font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
+                <div class="message-card p-6 sm:p-8 md:p-12 text-center" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-['Playfair_Display'] font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
                         A Message for Hope Etieno Bassey
                     </h2>
-                    <p class="text-lg text-gray-300 leading-relaxed">
+                    <p class="text-base sm:text-lg text-gray-300 leading-relaxed">
                         "Your compassion, strength, and unwavering love inspire everyone around you. You are the heart of our world, and we are so incredibly grateful for you. May this new year of life be filled with as much joy as you bring to others. Happy Birthday!"
                     </p>
                 </div>
@@ -242,20 +243,20 @@
         </section>
 
         <!-- Final call to action -->
-        <section class="py-20 text-center bg-gray-900">
-            <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-fuchsia-600">
+        <section class="py-10 sm:py-20 text-center bg-gray-900">
+            <h2 class="text-2xl sm:text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-fuchsia-600">
                 Let's Make This Year Unforgettable
             </h2>
-            <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+            <p class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-8">
                 Your journey is just beginning. What new adventure will you take on?
             </p>
-            <button id="start-celebration-btn" class="px-8 py-4 rounded-full text-lg font-bold transition transform hover:scale-105 duration-300 bg-gradient-to-br from-fuchsia-600 to-violet-600 hover:from-fuchsia-700 hover:to-violet-700 shadow-xl text-white">
+            <button id="start-celebration-btn" class="px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-bold transition transform hover:scale-105 active:scale-105 duration-300 bg-gradient-to-br from-fuchsia-600 to-violet-600 hover:from-fuchsia-700 hover:to-violet-700 shadow-xl text-white">
                 Start the Celebration!
             </button>
         </section>
 
-        <footer class="py-8 text-center text-gray-500 bg-gray-950">
-            <p>&copy; 2025 A Special Celebration. All Rights Reserved.</p>
+        <footer class="py-6 sm:py-8 text-center text-gray-500 bg-gray-950">
+            <p class="text-sm sm:text-base">&copy; 2025 A Special Celebration. All Rights Reserved.</p>
         </footer>
     </div>
     
@@ -283,7 +284,7 @@
             }
         }
         
-        // Enhanced photo hover effects
+        // Enhanced photo interactions for hover and touch
         function addPhotoInteractions() {
             const photoCards = document.querySelectorAll('.photo-card');
             
@@ -295,6 +296,21 @@
                 });
                 
                 card.addEventListener('mouseleave', function() {
+                    const baseTransform = this.classList.contains('animate') ? 'translateY(0) scale(1)' : 'translateY(60px) scale(1)';
+                    this.style.transform = baseTransform;
+                    this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.1)';
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                });
+
+                // Touch support
+                card.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'translateY(-16px) scale(1.02)';
+                    this.style.boxShadow = '0 40px 80px rgba(0, 0, 0, 0.7), 0 0 120px rgba(255, 215, 0, 0.3)';
+                    this.style.borderColor = 'rgba(255, 215, 0, 0.6)';
+                });
+                
+                card.addEventListener('touchend', function() {
                     const baseTransform = this.classList.contains('animate') ? 'translateY(0) scale(1)' : 'translateY(60px) scale(1)';
                     this.style.transform = baseTransform;
                     this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.1)';
@@ -330,28 +346,30 @@
             }
         }
         
-        // Add glow effect on mouse movement
+        // Add glow effect on mouse movement (disabled on mobile to improve performance)
         function addGlowEffect() {
-            document.addEventListener('mousemove', function(e) {
-                const cards = document.querySelectorAll('.photo-card, .message-card, .hero-content');
-                
-                cards.forEach(card => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
+            if (window.innerWidth > 640) { // Only apply on non-mobile screens
+                document.addEventListener('mousemove', function(e) {
+                    const cards = document.querySelectorAll('.photo-card, .message-card, .hero-content');
                     
-                    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                        card.style.setProperty('--mouse-x', x + 'px');
-                        card.style.setProperty('--mouse-y', y + 'px');
-                        card.style.background = `
-                        radial-gradient(circle 100px at var(--mouse-x) var(--mouse-y), rgba(255, 215, 0, 0.06), transparent),
-                        var(--glass)
-                        `;
-                    } else {
-                        card.style.background = 'var(--glass)';
-                    }
+                    cards.forEach(card => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                            card.style.setProperty('--mouse-x', x + 'px');
+                            card.style.setProperty('--mouse-y', y + 'px');
+                            card.style.background = `
+                            radial-gradient(circle 100px at var(--mouse-x) var(--mouse-y), rgba(255, 215, 0, 0.06), transparent),
+                            var(--glass)
+                            `;
+                        } else {
+                            card.style.background = 'var(--glass)';
+                        }
+                    });
                 });
-            });
+            }
         }
         
         // Initialize all interactions
@@ -369,33 +387,36 @@
         // Listen for scroll events
         window.addEventListener('scroll', animateOnScroll);
         
-        // Add subtle 3D tilt to hero section
-        document.addEventListener('mousemove', function(e) {
-            const heroContent = document.querySelector('.hero-content');
-            if (heroContent && heroContent.getBoundingClientRect().top < window.innerHeight) {
-                const rect = heroContent.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
+        // Add subtle 3D tilt to hero section (disabled on mobile to improve performance)
+        function addHeroTilt() {
+            if (window.innerWidth > 640) { // Only apply on non-mobile screens
+                document.addEventListener('mousemove', function(e) {
+                    const heroContent = document.querySelector('.hero-content');
+                    if (heroContent && heroContent.getBoundingClientRect().top < window.innerHeight) {
+                        const rect = heroContent.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+                        
+                        const x = (e.clientX - centerX) / rect.width;
+                        const y = (e.clientY - centerY) / rect.height;
+                        
+                        heroContent.style.transform = `
+                        translateY(0) 
+                        rotateX(${y * 3}deg) 
+                        rotateY(${x * 3}deg)
+                        scale(${1 + Math.abs(x * 0.01) + Math.abs(y * 0.01)})
+                        `;
+                    }
+                });
                 
-                const x = (e.clientX - centerX) / rect.width;
-                const y = (e.clientY - centerY) / rect.height;
-                
-                heroContent.style.transform = `
-                translateY(0) 
-                rotateX(${y * 3}deg) 
-                rotateY(${x * 3}deg)
-                scale(${1 + Math.abs(x * 0.01) + Math.abs(y * 0.01)})
-                `;
+                document.addEventListener('mouseleave', function() {
+                    const heroContent = document.querySelector('.hero-content');
+                    if (heroContent) {
+                        heroContent.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
+                    }
+                });
             }
-        });
-        
-        // Reset hero transform when mouse leaves
-        document.addEventListener('mouseleave', function() {
-            const heroContent = document.querySelector('.hero-content');
-            if (heroContent) {
-                heroContent.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
-            }
-        });
+        }
         
         // Function to reveal main content after fireworks
         function revealContent() {
@@ -408,6 +429,7 @@
                 addParallaxEffect();
                 enhanceScrolling();
                 addGlowEffect();
+                addHeroTilt();
             }
         }
     </script>
@@ -416,9 +438,9 @@
         function createFireworks() {
             const OVERLAY_DURATION = 5000; // total experience (ms)
             const FINAL_SCENE_DELAY = 1000; // how long to show the text before fading out
-            const INITIAL_FIREWORKS = 12; // in first 4 seconds
+            const INITIAL_FIREWORKS = window.innerWidth < 640 ? 8 : 12; // Fewer fireworks on mobile
             const INITIAL_WINDOW = 4000; // first 4 seconds
-            const EXTRA_FIREWORKS = 8; // random additional
+            const EXTRA_FIREWORKS = window.innerWidth < 640 ? 4 : 8; // Fewer on mobile
             const COLORS = ['#ffd700','#e8b4a3','#c0c0c0','#f8f6f0']; // gold, rose-gold, silver, pearl
             
             // canvas & context
@@ -625,7 +647,7 @@
             
             function drawFinalScene() {
                 ctx.clearRect(0,0,canvas.width, canvas.height); // Clear screen
-                ctx.font = `bold ${Math.floor(Math.min(window.innerWidth * 0.1, 100))}px Playfair Display`;
+                ctx.font = `bold ${Math.floor(Math.min(window.innerWidth * 0.1, 80))}px Playfair Display`; // Smaller font on mobile
                 ctx.textAlign = 'center';
                 
                 const gradient = ctx.createLinearGradient(0, canvas.height / 2 - 50, 0, canvas.height / 2 + 50);
@@ -679,7 +701,7 @@
                     if (p.dead) particles.splice(i,1);
                 }
                 
-                const MAX_PARTICLES = window.innerWidth < 600 ? 600 : 1200;
+                const MAX_PARTICLES = window.innerWidth < 640 ? 300 : 1200; // Fewer particles on mobile
                 if (particles.length > MAX_PARTICLES) {
                     particles.splice(0, particles.length - MAX_PARTICLES);
                 }
