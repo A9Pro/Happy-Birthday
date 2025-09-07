@@ -24,10 +24,15 @@
       z-index: 9999;
     }
 
+    .gallery {
+      text-align: center;
+      margin-top: 60px;
+    }
+
     .gallery img {
-      max-width: 100%;
+      max-width: 90%;
       border-radius: 20px;
-      margin: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
     }
   </style>
 </head>
@@ -37,20 +42,15 @@
 
   <h1 style="text-align:center; margin-top:50px;">🎉 Happy Birthday 🎉</h1>
 
-  <!-- Gallery -->
-  <div class="gallery" style="text-align:center;">
-    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore.jpg" alt="idore">
-    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore1.jpg" alt="idore1">
-    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore2.jpg" alt="idore2">
-    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore3.jpg" alt="idore3">
-    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore4.jpg" alt="idore4">
-    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore5.jpg" alt="idore5">
-    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore6.jpg" alt="idore6">
-    <img src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore7.jpg" alt="idore7">
+  <!-- Slideshow -->
+  <div class="gallery">
+    <img id="slideshow" src="https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore.jpg" alt="Birthday Slideshow">
   </div>
 
   <script>
+    // -------------------
     // Fireworks effect
+    // -------------------
     const canvas = document.getElementById("fireworksCanvas");
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
@@ -120,6 +120,27 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     });
+
+    // -------------------
+    // Slideshow effect
+    // -------------------
+    const slideshow = document.getElementById("slideshow");
+    const images = [
+      "https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore.jpg",
+      "https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore1.jpg",
+      "https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore2.jpg",
+      "https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore3.jpg",
+      "https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore4.jpg",
+      "https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore5.jpg",
+      "https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore6.jpg",
+      "https://raw.githubusercontent.com/A9Pro/Happy-Birthday/main/idore7.jpg"
+    ];
+
+    let current = 0;
+    setInterval(() => {
+      current = (current + 1) % images.length;
+      slideshow.src = images[current];
+    }, 3000); // change every 3 seconds
   </script>
 </body>
 </html>
