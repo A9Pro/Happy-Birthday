@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Queen</title>
-    <!-- Use Tailwind CSS for a professional look -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Library for scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;700&display=swap&font-display=swap');
         
         :root {
             --glass: rgba(255, 255, 255, 0.08);
         }
 
+        /* General Body and Container Styles */
         body {
             background-color: #0d0d0d;
             background-image: radial-gradient(circle at 10% 20%, rgba(200, 200, 200, 0.1) 0%, transparent 60%);
             min-height: 100vh;
         }
 
+        /* Hero section styling */
         .hero-section {
             background: linear-gradient(180deg, rgba(20, 20, 20, 1) 0%, rgba(40, 40, 40, 1) 100%);
             min-height: 100vh;
@@ -35,6 +39,7 @@
             transform-style: preserve-3d;
         }
 
+        /* Animated cards */
         .photo-card, .message-card {
             transform: translateY(60px) scale(0.95);
             opacity: 0;
@@ -46,17 +51,6 @@
             position: relative;
         }
 
-        .photo-card.animate, .message-card.animate {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-        }
-
-        .photo-card:hover {
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7), 0 0 120px rgba(255, 215, 0, 0.3);
-            border-color: rgba(255, 215, 0, 0.6);
-            transform: translateY(-16px) scale(1.02);
-        }
-        
         .photo-card img {
             border-radius: 1.5rem;
             object-fit: cover;
@@ -64,22 +58,31 @@
             height: 100%;
         }
 
+        /* Parallax floating elements */
         .floating-element {
             position: absolute;
             z-index: -1;
             transition: transform 0.1s linear;
         }
 
+        /* Scroll indicator animation */
         .scroll-indicator {
             animation: bounce 2s infinite;
         }
         
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-7px); }
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-15px);
+            }
+            60% {
+                transform: translateY(-7px);
+            }
         }
         
+        /* Fireworks Canvas Overlay */
         #fireworks-overlay {
             position: fixed;
             top: 0;
@@ -107,6 +110,12 @@
             opacity: 0;
             display: none;
         }
+
+        /* Accessibility: Focus styles for buttons */
+        button:focus {
+            outline: 2px solid #ffd700;
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-white font-sans overflow-x-hidden">
@@ -127,56 +136,104 @@
                     A birthday celebration for the extraordinary person who brings light and laughter into our lives.
                 </p>
                 <div class="flex items-center justify-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                    <button id="explore-btn" class="px-6 py-3 rounded-full text-lg font-bold transition transform hover:scale-105 duration-300 bg-transparent border border-rose-300 text-rose-300 hover:bg-rose-300 hover:text-white shadow-lg">
+                    <button id="explore-btn" aria-label="Scroll to photo memories" class="px-6 py-3 rounded-full text-lg font-bold transition transform hover:scale-105 duration-300 bg-transparent border border-rose-300 text-rose-300 hover:bg-rose-300 hover:text-white shadow-lg focus:outline focus:outline-rose-300 focus:outline-offset-2">
                         Explore Memories
                     </button>
                 </div>
             </div>
             
+            <!-- Floating elements -->
             <div class="floating-element w-48 h-48 bg-yellow-400 opacity-10 rounded-full blur-3xl" style="top: 10%; left: 15%;"></div>
             <div class="floating-element w-32 h-32 bg-rose-400 opacity-10 rounded-full blur-3xl" style="top: 70%; left: 80%;"></div>
             <div class="floating-element w-24 h-24 bg-amber-400 opacity-10 rounded-full blur-3xl" style="top: 50%; left: 50%;"></div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
         </header>
 
-        <!-- Gallery -->
+        <!-- Gallery of images -->
         <section class="photos-section py-20 px-8 bg-gray-900" id="memories">
             <div class="container mx-auto max-w-6xl">
                 <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
                     A Collection of Joyful Moments
                 </h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Example with real image -->
-                    <div class="photo-card animate">
-                        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="A cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                    <!-- Photo Card 1 -->
+                    <div class="photo-card" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
+                        <img src="https://placehold.co/600x400/ffb6c1/fff?text=Beach+Getaway" alt="Beach getaway memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Smiles</h3>
-                            <p class="text-gray-400">A candid joyful moment.</p>
+                            <h3 class="text-xl font-bold mb-2">Beach Getaway 2024</h3>
+                            <p class="text-gray-300">Building sandcastles and chasing waves with friends.</p>
                         </div>
                     </div>
-
-                    <div class="photo-card animate">
-                        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="Another cherished memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                    <!-- Photo Card 2 -->
+                    <div class="photo-card" data-aos="fade-up" data-aos-delay="200" style="--mouse-x: 0px; --mouse-y: 0px;">
+                        <img src="https://placehold.co/600x400/90ee90/fff?text=Winter+Evening" alt="Winter evening memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Memories</h3>
-                            <p class="text-gray-400">Captured with love.</p>
+                            <h3 class="text-xl font-bold mb-2">Winter Evening Glow</h3>
+                            <p class="text-gray-300">Cozy nights by the fireplace with loved ones.</p>
                         </div>
                     </div>
-
-                    <div class="photo-card animate">
-                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="Special memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                    <!-- Photo Card 3 -->
+                    <div class="photo-card" data-aos="fade-up" data-aos-delay="400" style="--mouse-x: 0px; --mouse-y: 0px;">
+                        <img src="https://placehold.co/600x400/add8e6/fff?text=Festival+Fun" alt="Festival memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
                         <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Happy Times</h3>
-                            <p class="text-gray-400">Beautiful moments together.</p>
+                            <h3 class="text-xl font-bold mb-2">Festival Fun</h3>
+                            <p class="text-gray-300">Dancing and laughing at the summer festival.</p>
+                        </div>
+                    </div>
+                    <!-- Photo Card 4 -->
+                    <div class="photo-card" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
+                        <img src="https://placehold.co/600x400/ffcccb/fff?text=City+Adventure" alt="City adventure memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">City Adventure</h3>
+                            <p class="text-gray-300">Exploring vibrant streets and new cuisines.</p>
+                        </div>
+                    </div>
+                    <!-- Photo Card 5 -->
+                    <div class="photo-card" data-aos="fade-up" data-aos-delay="200" style="--mouse-x: 0px; --mouse-y: 0px;">
+                        <img src="https://placehold.co/600x400/ffa07a/fff?text=Family+Picnic" alt="Family picnic memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Family Picnic</h3>
+                            <p class="text-gray-300">Sunny days and shared stories in the park.</p>
+                        </div>
+                    </div>
+                    <!-- Photo Card 6 -->
+                    <div class="photo-card" data-aos="fade-up" data-aos-delay="400" style="--mouse-x: 0px; --mouse-y: 0px;">
+                        <img src="https://placehold.co/600x400/bdb76b/fff?text=Graduation+Day" alt="Graduation memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Graduation Triumph</h3>
+                            <p class="text-gray-300">Celebrating a milestone with pride and joy.</p>
+                        </div>
+                    </div>
+                    <!-- Photo Card 7 -->
+                    <div class="photo-card" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
+                        <img src="https://placehold.co/600x400/c7a9c7/fff?text=Road+Trip" alt="Road trip memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Epic Road Trip</h3>
+                            <p class="text-gray-300">Adventures on the open road with friends.</p>
+                        </div>
+                    </div>
+                    <!-- Photo Card 8 -->
+                    <div class="photo-card" data-aos="fade-up" data-aos-delay="200" style="--mouse-x: 0px; --mouse-y: 0px;">
+                        <img src="https://placehold.co/600x400/87cefa/fff?text=Starry+Night" alt="Starry night memory" class="w-full h-72 object-cover rounded-2xl mb-4 shadow-xl">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Starry Night Camp</h3>
+                            <p class="text-gray-300">Stargazing and campfire tales under the sky.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Message -->
+        <!-- Personalized message -->
         <section class="py-20 px-8 bg-gray-950">
             <div class="container mx-auto max-w-3xl">
-                <div class="message-card p-8 md:p-12 text-center animate">
+                <div class="message-card p-8 md:p-12 text-center" data-aos="fade-up" style="--mouse-x: 0px; --mouse-y: 0px;">
                     <h2 class="text-3xl md:text-4xl font-['Playfair_Display'] font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
                         A Message for Hope Etieno Bassey
                     </h2>
@@ -186,13 +243,471 @@
                 </div>
             </div>
         </section>
-    </div>
 
+        <!-- Final call to action -->
+        <section class="py-20 text-center bg-gray-900">
+            <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-fuchsia-600">
+                Let's Make This Year Unforgettable
+            </h2>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+                Your journey is just beginning. What new adventure will you take on?
+            </p>
+            <button id="start-celebration-btn" aria-label="Restart fireworks celebration" class="px-8 py-4 rounded-full text-lg font-bold transition transform hover:scale-105 duration-300 bg-gradient-to-br from-fuchsia-600 to-violet-600 hover:from-fuchsia-700 hover:to-violet-700 shadow-xl text-white focus:outline focus:outline-fuchsia-600 focus:outline-offset-2">
+                Start the Celebration!
+            </button>
+        </section>
+
+        <footer class="py-8 text-center text-gray-500 bg-gray-950">
+            <p>&copy; 2025 A Special Celebration. All Rights Reserved.</p>
+        </footer>
+    </div>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Initialize AOS
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('fireworks-overlay').classList.add('hidden');
-            document.getElementById('main-content').classList.remove('hidden');
+            AOS.init({
+                duration: 600,
+                easing: 'ease-out-cubic',
+                once: true
+            });
+            createFireworks();
+            const startBtn = document.getElementById('start-celebration-btn');
+            if (startBtn) {
+                startBtn.addEventListener('click', () => {
+                    const overlay = document.getElementById('fireworks-overlay');
+                    const mainContent = document.getElementById('main-content');
+                    if (overlay && mainContent) {
+                        overlay.classList.remove('hidden');
+                        mainContent.classList.add('hidden');
+                        createFireworks();
+                    }
+                });
+            }
         });
+
+        // Enhanced photo hover effects
+        function addPhotoInteractions() {
+            const photoCards = document.querySelectorAll('.photo-card');
+            photoCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-16px) scale(1.02)';
+                    this.style.boxShadow = '0 40px 80px rgba(0, 0, 0, 0.7), 0 0 120px rgba(255, 215, 0, 0.3)';
+                    this.style.borderColor = 'rgba(255, 215, 0, 0.6)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const baseTransform = this.classList.contains('aos-animate') ? 'translateY(0) scale(1)' : 'translateY(60px) scale(0.95)';
+                    this.style.transform = baseTransform;
+                    this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.1)';
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                });
+            });
+        }
+        
+        // Parallax effect for floating elements
+        function addParallaxEffect() {
+            const floatingElements = document.querySelectorAll('.floating-element');
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.3;
+                floatingElements.forEach((element, index) => {
+                    const speed = (index + 1) * 0.15;
+                    element.style.transform = `translateY(${rate * speed}px) rotate(${scrolled * 0.05}deg)`;
+                });
+            });
+        }
+        
+        // Smooth scroll enhancement
+        function enhanceScrolling() {
+            const exploreBtn = document.getElementById('explore-btn');
+            if (exploreBtn) {
+                exploreBtn.addEventListener('click', () => {
+                    const photosSection = document.querySelector('.photos-section');
+                    if (photosSection) {
+                        photosSection.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+        }
+        
+        // Add glow effect on mouse movement
+        function addGlowEffect() {
+            document.addEventListener('mousemove', function(e) {
+                const cards = document.querySelectorAll('.photo-card, .message-card, .hero-content');
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                        card.style.setProperty('--mouse-x', x + 'px');
+                        card.style.setProperty('--mouse-y', y + 'px');
+                        card.style.background = `
+                            radial-gradient(circle 100px at var(--mouse-x) var(--mouse-y), rgba(255, 215, 0, 0.06), transparent),
+                            var(--glass)
+                        `;
+                    } else {
+                        card.style.background = 'var(--glass)';
+                    }
+                });
+            });
+        }
+        
+        // Add 3D tilt to hero section (disabled on mobile)
+        function addHeroTilt() {
+            if (window.innerWidth <= 768) return;
+            document.addEventListener('mousemove', function(e) {
+                const heroContent = document.querySelector('.hero-content');
+                if (heroContent && heroContent.getBoundingClientRect().top < window.innerHeight) {
+                    const rect = heroContent.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    const x = (e.clientX - centerX) / rect.width;
+                    const y = (e.clientY - centerY) / rect.height;
+                    heroContent.style.transform = `
+                        translateY(0) 
+                        rotateX(${y * 3}deg) 
+                        rotateY(${x * 3}deg)
+                        scale(${1 + Math.abs(x * 0.01) + Math.abs(y * 0.01)})
+                    `;
+                }
+            });
+            document.addEventListener('mouseleave', function() {
+                const heroContent = document.querySelector('.hero-content');
+                if (heroContent) {
+                    heroContent.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
+                }
+            });
+        }
+        
+        // Reveal main content after fireworks
+        function revealContent() {
+            const mainContent = document.getElementById('main-content');
+            if (mainContent) {
+                mainContent.classList.remove('hidden');
+                addPhotoInteractions();
+                addParallaxEffect();
+                enhanceScrolling();
+                addGlowEffect();
+                addHeroTilt();
+            }
+        }
+    </script>
+    <script>
+        // Fireworks canvas implementation
+        function createFireworks() {
+            const OVERLAY_DURATION = window.innerWidth < 600 ? 3000 : 5000;
+            const FINAL_SCENE_DELAY = 1000;
+            const INITIAL_FIREWORKS = window.innerWidth < 600 ? 6 : 12;
+            const INITIAL_WINDOW = window.innerWidth < 600 ? 2000 : 4000;
+            const EXTRA_FIREWORKS = window.innerWidth < 600 ? 4 : 8;
+            const COLORS = ['#ffd700','#e8b4a3','#c0c0c0','#f8f6f0'];
+            
+            const canvas = document.getElementById('fw-canvas');
+            const overlay = document.getElementById('fireworks-overlay');
+            if (!canvas || !overlay) {
+                console.error('Canvas or overlay element not found');
+                return;
+            }
+            
+            let ctx, W, H, DPR;
+            let rockets = [];
+            let particles = [];
+            let startTime = null;
+            let schedule = [];
+            let scheduleIndex = 0;
+            let running = true;
+            let rafId = null;
+            
+            function fitCanvas() {
+                DPR = window.devicePixelRatio || 1;
+                canvas.width = Math.min(1920, Math.floor(window.innerWidth * DPR));
+                canvas.height = Math.min(1080, Math.floor(window.innerHeight * DPR));
+                canvas.style.width = window.innerWidth + 'px';
+                canvas.style.height = window.innerHeight + 'px';
+                ctx = canvas.getContext('2d');
+                ctx.setTransform(1,0,0,1,0,0);
+            }
+            
+            function rand(min, max) { return Math.random() * (max - min) + min; }
+            function choose(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+            
+            class Rocket {
+                constructor(x, color, vx, vy, explodeY, final = false) {
+                    this.x = x;
+                    this.y = canvas.height / DPR + 10;
+                    this.vx = vx;
+                    this.vy = vy;
+                    this.color = color;
+                    this.explodeY = explodeY;
+                    this.trail = [];
+                    this.dead = false;
+                    this.final = final;
+                }
+                update(dt) {
+                    const g = 700;
+                    this.vy += g * (dt * 0.001);
+                    this.x += this.vx * (dt * 0.001);
+                    this.y += this.vy * (dt * 0.001);
+                    this.trail.push({x: this.x, y: this.y, t: Date.now()});
+                    if (this.trail.length > 12) this.trail.shift();
+                    if (this.y <= this.explodeY || this.vy > 80) {
+                        this.explode();
+                        this.dead = true;
+                    }
+                }
+                explode() {
+                    const count = this.final ? Math.floor(rand(50, 70)) : Math.floor(rand(25, 40));
+                    const baseSpeed = this.final ? rand(250, 480) : rand(150, 380);
+                    for (let i = 0; i < count; i++) {
+                        const angle = rand(0, Math.PI * 2);
+                        const speed = baseSpeed * (0.4 + Math.random() * 0.9);
+                        const vx = Math.cos(angle) * speed + this.vx * 0.2;
+                        const vy = Math.sin(angle) * speed + this.vy * 0.2;
+                        const size = this.final ? rand(1.8, 4.0) : rand(1.2, 3.2);
+                        particles.push(new Particle(this.x, this.y, vx, vy, choose(COLORS), rand(900, 1500), size));
+                    }
+                    const sparkleCount = Math.floor(rand(6, 12));
+                    for (let s = 0; s < sparkleCount; s++) {
+                        const angle = rand(0, Math.PI * 2);
+                        const speed = rand(30, 140);
+                        particles.push(new Sparkle(
+                            this.x + rand(-8, 8),
+                            this.y + rand(-8, 8),
+                            Math.cos(angle) * speed,
+                            Math.sin(angle) * speed - 40,
+                            choose(COLORS),
+                            rand(300, 700),
+                            rand(0.6, 1.4)
+                        ));
+                    }
+                }
+                draw(ctx) {
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'lighter';
+                    const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 22);
+                    grad.addColorStop(0, this.color);
+                    grad.addColorStop(0.4, this.color + '66');
+                    grad.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 6, 0, Math.PI * 2);
+                    ctx.fill();
+                    for (let i = 0; i < this.trail.length; i++) {
+                        const p = this.trail[i];
+                        const age = (Date.now() - p.t) / 500;
+                        ctx.globalAlpha = Math.max(0, 1 - age);
+                        ctx.fillStyle = this.color;
+                        ctx.fillRect(p.x - 1.5, p.y - 1.5, 3, 3);
+                    }
+                    ctx.restore();
+                    ctx.globalAlpha = 1;
+                }
+            }
+            
+            class Particle {
+                constructor(x, y, vx, vy, color, life, size) {
+                    this.x = x;
+                    this.y = y;
+                    this.vx = vx;
+                    this.vy = vy;
+                    this.color = color;
+                    this.life = life;
+                    this.maxLife = life;
+                    this.size = size;
+                    this.age = 0;
+                    this.dead = false;
+                }
+                update(dt) {
+                    const gravity = 280;
+                    this.vy += gravity * (dt * 0.001) * 0.8;
+                    this.vx *= 0.995;
+                    this.vy *= 0.998;
+                    this.x += this.vx * (dt * 0.001);
+                    this.y += this.vy * (dt * 0.001);
+                    this.age += dt;
+                    if (this.age >= this.life) this.dead = true;
+                }
+                draw(ctx) {
+                    const t = this.age / this.maxLife;
+                    const alpha = Math.max(0, 1 - t);
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'lighter';
+                    const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, Math.max(8, this.size * 6));
+                    grad.addColorStop(0, hexWithAlpha(this.color, Math.min(1, alpha * 1.1)));
+                    grad.addColorStop(0.3, hexWithAlpha(this.color, alpha * 0.45));
+                    grad.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, Math.max(1, this.size * (1 - t * 0.6)), 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                    ctx.globalAlpha = alpha;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, Math.max(0.6, this.size * 0.35), 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+            }
+            
+            class Sparkle extends Particle {
+                constructor(x, y, vx, vy, color, life, size) {
+                    super(x, y, vx, vy, color, life, size);
+                }
+                draw(ctx) {
+                    const t = this.age / this.maxLife;
+                    const alpha = Math.max(0, 1 - t);
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'lighter';
+                    ctx.fillStyle = this.color;
+                    ctx.globalAlpha = alpha;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, Math.max(0.8, this.size * 0.4), 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                    ctx.globalAlpha = 1;
+                }
+            }
+            
+            function hexWithAlpha(hex, a) {
+                const c = hex.replace('#','');
+                const r = parseInt(c.substring(0,2),16);
+                const g = parseInt(c.substring(2,4),16);
+                const b = parseInt(c.substring(4,6),16);
+                return `rgba(${r},${g},${b},${a})`;
+            }
+            
+            function scheduleFireworks() {
+                schedule = [];
+                for (let i = 0; i < INITIAL_FIREWORKS; i++) {
+                    schedule.push(Math.floor(i * (INITIAL_WINDOW / INITIAL_FIREWORKS)));
+                }
+                for (let j = 0; j < EXTRA_FIREWORKS; j++) {
+                    schedule.push(Math.floor(rand(200, OVERLAY_DURATION - 800)));
+                }
+                schedule.sort((a,b) => a - b);
+                scheduleIndex = 0;
+            }
+            
+            function spawnRocket() {
+                const margin = Math.max(60, window.innerWidth * 0.06);
+                const x = rand(margin, window.innerWidth - margin);
+                const explodeY = rand(window.innerHeight * 0.18, window.innerHeight * 0.45);
+                const vx = rand(-80, 80);
+                const vy = -rand(520, 760);
+                const color = choose(COLORS);
+                rockets.push(new Rocket(x, color, vx, vy, explodeY));
+            }
+            
+            function drawFinalScene() {
+                ctx.clearRect(0,0,canvas.width, canvas.height);
+                ctx.font = `bold ${Math.floor(Math.min(window.innerWidth * 0.08, 80))}px Playfair Display`;
+                ctx.textAlign = 'center';
+                const gradient = ctx.createLinearGradient(0, canvas.height / 2 - 50, 0, canvas.height / 2 + 50);
+                gradient.addColorStop(0, '#ffd700');
+                gradient.addColorStop(0.5, '#e8b4a3');
+                gradient.addColorStop(1, '#c0c0c0');
+                ctx.fillStyle = gradient;
+                ctx.shadowColor = '#ffd700';
+                ctx.shadowBlur = 40;
+                const text1 = "Happy Birthday";
+                const text2 = "Queen";
+                const text1Y = canvas.height / 2 - 20;
+                const text2Y = canvas.height / 2 + 50;
+                ctx.fillText(text1, canvas.width / 2, text1Y);
+                ctx.fillText(text2, canvas.width / 2, text2Y);
+                const x = canvas.width / 2;
+                const y = canvas.height / 2 + 100;
+                const vx = 0;
+                const vy = -600;
+                const explodeY = canvas.height / 2 + 40;
+                const color = '#ffd700';
+                rockets.push(new Rocket(x, color, vx, vy, explodeY, true));
+            }
+            
+            function frame(now) {
+                if (!startTime) startTime = now;
+                const elapsed = now - startTime;
+                while (scheduleIndex < schedule.length && schedule[scheduleIndex] <= elapsed) {
+                    spawnRocket();
+                    scheduleIndex++;
+                }
+                ctx.clearRect(0,0,canvas.width, canvas.height);
+                for (let i = rockets.length - 1; i >= 0; i--) {
+                    const r = rockets[i];
+                    r.update(16.6);
+                    r.draw(ctx);
+                    if (r.dead) rockets.splice(i,1);
+                }
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.update(16.6);
+                    p.draw(ctx);
+                    if (p.dead) particles.splice(i,1);
+                }
+                const MAX_PARTICLES = window.innerWidth < 600 ? 300 : 800;
+                if (particles.length > MAX_PARTICLES) {
+                    particles.splice(0, particles.length - MAX_PARTICLES);
+                }
+                if (elapsed < OVERLAY_DURATION) {
+                    rafId = requestAnimationFrame(frame);
+                } else {
+                    endShow();
+                }
+            }
+            
+            function endShow() {
+                if (!running) return;
+                running = false;
+                if (rafId) cancelAnimationFrame(rafId);
+                rockets = [];
+                particles = [];
+                drawFinalScene();
+                const finalAnimationDuration = 1500;
+                const finalStartTime = Date.now();
+                function finalFrame() {
+                    ctx.clearRect(0,0,canvas.width, canvas.height);
+                    drawFinalScene();
+                    for (let i = rockets.length - 1; i >= 0; i--) {
+                        const r = rockets[i];
+                        r.update(16.6);
+                        r.draw(ctx);
+                        if (r.dead) rockets.splice(i,1);
+                    }
+                    for (let i = particles.length - 1; i >= 0; i--) {
+                        const p = particles[i];
+                        p.update(16.6);
+                        p.draw(ctx);
+                        if (p.dead) particles.splice(i,1);
+                    }
+                    if (Date.now() - finalStartTime < finalAnimationDuration) {
+                        requestAnimationFrame(finalFrame);
+                    } else {
+                        setTimeout(() => {
+                            overlay.classList.add('hidden');
+                            revealContent();
+                            ctx.clearRect(0,0,canvas.width, canvas.height);
+                        }, 900);
+                    }
+                }
+                requestAnimationFrame(finalFrame);
+            }
+            
+            function init() {
+                rockets = [];
+                particles = [];
+                scheduleIndex = 0;
+                running = true;
+                if (rafId) cancelAnimationFrame(rafId);
+                fitCanvas();
+                scheduleFireworks();
+                rafId = requestAnimationFrame(frame);
+            }
+            init();
+        }
     </script>
 </body>
 </html>
