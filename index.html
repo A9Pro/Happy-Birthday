@@ -1,40 +1,130 @@
-<!DOCTYPE html>
-<html lang="en" class="bg-gray-900 text-white font-['Inter'] scroll-smooth overflow-x-hidden">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Queen</title>
-    <!-- Use Tailwind CSS for a professional look -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;700&display=swap');
-        
-        :root {
-            --glass: rgba(255, 255, 255, 0.08);
-        }
+<script>
+  const canvas = document.getElementById("fireworksCanvas");
+  const ctx = canvas.getContext("2d");
+  let fireworks = [];
+  let particles = [];
 
-        /* General Body and Container Styles */
-        body {
-            background-color: #0d0d0d;
-            background-image: radial-gradient(circle at 10% 20%, rgba(200, 200, 200, 0.1) 0%, transparent 60%);
-            min-height: 100vh;
-        }
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
 
-        /* Hero section styling for the grand entrance */
-        .hero-section {
-            background: linear-gradient(180deg, rgba(20, 20, 20, 1) 0%, rgba(40, 40, 40, 1) 100%);
-            min-height: 80vh; /* Reduced for mobile */
-            perspective: 1000px;
-        }
+  function rand(min, max) {
+    return Math.random() * (max - min) + min;
+  }
 
-        .hero-content {
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease-out;
-            background: var(--glass);
-            border-radius: 1.5rem; /* Slightly smaller for mobile */
-            transform-style: preserve-3d;
+  class Firework {
+    constructor(x, y, targetY) {
+      this.x = x;
+      this.y = y;
+      this.targetY = targetY;
+      this.speed = 2;
+      this.angle = Math.PI / 2;
+      this.vx = 0;
+      this.vy = -this.speed;
+      this.color = `hsl(${Math.floor(rand(0, 360))}, 100%, 50%)`;
+      this.exploded = false;
+    }
+
+    update() {
+      if (this.y > this.targetY) {
+        this.y += this.vy;
+      } else if (!this.exploded) {
+        this.explode();
+        this.exploded = true;
+      }
+    }
+
+    explode() {
+      for (let i = 0; i < 100; i++) {
+        particles.push(new Particle(this.x, this.y, this.color));
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    }
+  }
+
+  class Particle {
+    constructor(x, y, color) {
+      this.x = x;
+      this.y = y;
+      this.speed = rand(1, 6);
+      this.angle = rand(0, Math.PI * 2);
+      this.vx = Math.cos(this.angle) * this.speed;
+      this.vy = Math.sin(this.angle) * this.speed;
+      this.alpha = 1;
+      this.color = color;
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.alpha -= 0.02;
+    }
+
+    draw() {
+      ctx.globalAlpha = this.alpha;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    fireworks.forEach((fw, i) => {
+      fw.update();
+      fw.draw();
+      if (fw.exploded) fireworks.splice(i, 1);
+    });
+
+    particles.forEach((p, i) => {
+      p.update();
+      p.draw();
+      if (p.alpha <= 0) particles.splice(i, 1);
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  function launchFirework() {
+    const x = rand(100, canvas.width - 100);
+    const y = canvas.height;
+    const targetY = rand(100, canvas.height / 2);
+    fireworks.push(new Firework(x, y, targetY));
+  }
+
+  // Run fireworks for 3 seconds, then show content
+  animate();
+  const fwInterval = setInterval(launchFirework, 300);
+
+  setTimeout(() => {
+    clearInterval(fwInterval);
+    // Fade out overlay
+    const overlay = document.getElementById("overlay");
+    overlay.style.transition = "opacity 1.5s ease";
+    overlay.style.opacity = 0;
+
+    setTimeout(() => {
+      overlay.style.display = "none";
+      revealContent(); // 👈 Now your content shows
+    }, 1500);
+  }, 3000);
+
+  function revealContent() {
+    document.getElementById("main-content").style.display = "block";
+  }
+</script>            transform-style: preserve-3d;
         }
 
         /* Animated cards for the photos and message */
@@ -741,3 +831,4 @@
     </script>
 </body>
 </html>
+
